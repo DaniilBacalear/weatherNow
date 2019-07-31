@@ -2,7 +2,7 @@ const express = require('express')
 const hbs = require('hbs')
 const path = require('path')
 const app = express()
-const port = 3000 || process.env.PORT
+const port =  process.env.PORT||3000
 const weather = require(path.join(__dirname,'/weather.js'))
 const geocode = require(path.join(__dirname,'geocode.js'))
 // configuring handlebars
