@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WeatherNow</title>
+    <link rel="icon" href="./img/weather-icon.png">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<div class="main-content">
+    <header>
+        {{>header}}
+        <button id="get-my-location-weather">Get My Current Locations Weather!</button>
+        <p id="temp"></p>
+        <p id="wind"></p>
+        <p id="cond"></p>
+    </header>
+</div>
+<footer>{{>footer}}</footer>
+<script src="/js/location.js"></script>
+</body>
+</html>

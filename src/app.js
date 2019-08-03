@@ -14,28 +14,43 @@ app.use(express.static(path.join(__dirname,'../public')))
 // configuring express server
 app.get('',(req,res)=>{
     res.render('',{
-        section: 'WeatherNow'
+        section: 'WeatherSearch'
     })
 })
 app.get('/weather',(req,res)=>{
-    if(!req.query.address){
-        return res.send('You must provide an address')
-    }
-        geocode(req.query.address,(error,{longitude,latitude,location}={})=>{
+    if(req.query.longitude && req.query.latitude){
+        weather(req.query.latitude,req.query.longitude,(error,{temperature,conditions,wind})=>{
             if(error){
-                res.send(error)
+                 res.send({error:error})
             }
             else{
-                weather(longitude,latitude,(error,{temperature,conditions,wind})=>{
-                    if(error){
+                res.send({temperature,conditions,wind})
+            }
+        })
+    }
+    else {
+        if (!req.query.address) {
+            return res.send('You must provide an address')
+        }
+        geocode(req.query.address, (error, {longitude, latitude, location} = {}) => {
+            if (error) {
+                res.send(error)
+            } else {
+                weather(longitude, latitude, (error, {temperature, conditions, wind}) => {
+                    if (error) {
                         res.send(error)
-                    }
-                    else{
-                         res.send({temperature,location,conditions,wind})
+                    } else {
+                        res.send({temperature, location, conditions, wind})
                     }
                 })
             }
         })
+    }
+})
+app.get('/mylocation',(req,res)=>{
+    res.render('mylocation',{
+        section:'WeatherNow'
+    })
 })
 
 app.get('/about',(req,res)=>{
