@@ -2,19 +2,23 @@ const express = require('express')
 const hbs = require('hbs')
 const path = require('path')
 const app = express()
-const port =  process.env.PORT||3000
+const port =  process.env.PORT||5000
 const weather = require(path.join(__dirname,'/weather.js'))
 const geocode = require(path.join(__dirname,'geocode.js'))
+
 // configuring handlebars
+
 app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'../templates/views'))
 hbs.registerPartials(path.join(__dirname,'../templates/partials'))
 app.use(express.static(path.join(__dirname,'../public')))
 
 // configuring express server
+
 app.get('',(req,res)=>{
     res.render('',{
-        section: 'WeatherSearch'
+        section: 'WeatherSearch',
+        a1:'highlight'
     })
 })
 app.get('/weather',(req,res)=>{
@@ -49,19 +53,22 @@ app.get('/weather',(req,res)=>{
 })
 app.get('/mylocation',(req,res)=>{
     res.render('mylocation',{
-        section:'WeatherNow'
+        section:'WeatherNow',
+        a2:'highlight'
     })
 })
 
 app.get('/about',(req,res)=>{
     res.render('about',{
-        section:'About'
+        section:'About',
+        a3:'highlight'
     })
 })
 
 app.get('/help',(req,res)=>{
     res.render('help',{
-        section:'Help'
+        section:'Help',
+        a4:'highlight'
     })
 })
 

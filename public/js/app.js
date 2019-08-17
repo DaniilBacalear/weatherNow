@@ -4,6 +4,7 @@ const loc = document.querySelector('#loc')
 const temp = document.querySelector('#temp')
 const wind  = document.querySelector("#wind")
 const conditions = document.querySelector('#cond')
+const resultsDiv = document.querySelector('#sss')
 
 weatherForm.addEventListener('submit',(e)=> {
         e.preventDefault()
@@ -12,6 +13,8 @@ weatherForm.addEventListener('submit',(e)=> {
                 response.json().then((data) => {
                         if (data.error) loc.textContent = data.error
                         else{
+                            resultsDiv.className = 'requestText'
+                            console.log(data.location)
                             loc.textContent="Location: " + data.location
                             temp.textContent="Temperature: " + data.temperature +"°C"
                             wind.textContent="Wind Speed: " + data.wind +" km/h"

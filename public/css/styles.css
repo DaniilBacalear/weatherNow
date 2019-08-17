@@ -11,6 +11,13 @@ body{
 .main-content{
     flex-grow: 1;
 }
+.requestText{
+    color: red;
+    border: solid #cccccc 1px ;
+    padding-left: 10px;
+    margin-top: 10px;
+;
+}
 footer{
     color: #888888;
     border-top: #eeeeee solid;
@@ -26,6 +33,9 @@ header a{
     color: #888888;
     margin-right: 5px;
 }
+header a:hover{
+    color: black;
+}
 h1{
     font-size: 72px;
 }
@@ -40,7 +50,18 @@ button{
     color: #eeeeee;
     font-weight: bold;
 }
+button:hover{
+    background-color: black;
+    color: white;
+}
 input{
     padding: 10px;
     border: solid 1px #888888;
+}
+input:hover{
+    border: solid 1px black;
+}
+.highlight{
+    color: black;
+    font-weight: bold;
 }
