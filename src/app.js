@@ -5,7 +5,7 @@ const app = express()
 const port =  process.env.PORT||5000
 const weather = require(path.join(__dirname,'/weather.js'))
 const geocode = require(path.join(__dirname,'geocode.js'))
-
+const reverseGeocode = require(path.join(__dirname,'reverse-geocode.js'))
 // configuring handlebars
 
 app.set('view engine','hbs')
@@ -28,7 +28,8 @@ app.get('/weather',(req,res)=>{
                  res.send({error:error})
             }
             else{
-                res.send({temperature,conditions,wind})
+               //res.send({temperature,conditions,wind})
+
             }
         })
     }

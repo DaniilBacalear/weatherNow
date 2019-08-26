@@ -1,14 +1,12 @@
 'use strict'
 const geolocation = navigator.geolocation;
-const path = require('path')
-//const geocode = require(path.join(__dirname,'/geocode.js'))
-//const weather = require(path.join(__dirname,'../src/weather.js'))
-const getWeatherButton = document.getElementById("get-my-location-weather")
+const getWeatherButton = document.querySelector("#get-my-location-weather")
 const loc = document.querySelector("#loc")
 const temp = document.querySelector("#temp")
 const wind = document.querySelector("#wind")
 const cond = document.querySelector("#cond")
 getWeatherButton.addEventListener('click',(e)=>{
+    console.log('clicked')
     if(geolocation){
         geolocation.getCurrentPosition((position)=>{
             fetch('/weather?longitude='+encodeURIComponent(position.coords.longitude.toString())+'&latitude='+encodeURIComponent(position.coords.latitude.toString())).then((response)=>{
