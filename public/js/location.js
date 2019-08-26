@@ -12,6 +12,8 @@ getWeatherButton.addEventListener('click',(e)=>{
             fetch('/weather?longitude='+encodeURIComponent(position.coords.longitude.toString())+'&latitude='+encodeURIComponent(position.coords.latitude.toString())).then((response)=>{
                response.json().then((data)=>{
                    if(data) {
+                       console.log(position.coords.longitude,position.coords.latitude)
+                       loc.innerHTML = 'Your Current Location: ' + data.location
                        temp.innerHTML = 'Current Temperature: ' + data.temperature + '°C'
                        wind.innerHTML = 'Wind: ' + data.wind +'km/h'
                        cond.innerHTML = 'Current Conditions: ' + data.conditions

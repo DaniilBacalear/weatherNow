@@ -6,6 +6,7 @@ const port =  process.env.PORT||5000
 const weather = require(path.join(__dirname,'/weather.js'))
 const geocode = require(path.join(__dirname,'geocode.js'))
 const reverseGeocode = require(path.join(__dirname,'reverse-geocode.js'))
+const autoComplete = require(path.join(__dirname,'search-autocomplete.js'))
 // configuring handlebars
 
 app.set('view engine','hbs')
@@ -29,6 +30,12 @@ app.get('/weather',(req,res)=>{
             }
             else{
                //res.send({temperature,conditions,wind})
+                reverseGeocode(req.query.longitude,req.query.latitude,(error,{location})=>{
+                    if(error) res.send({error:error})
+                    else{
+                        res.send({temperature,conditions,wind,location})
+                    }
+                })
 
             }
         })
@@ -65,7 +72,18 @@ app.get('/about',(req,res)=>{
         a3:'highlight'
     })
 })
-
+app.get('/autocomplete',(req,res)=>{
+    if(req.query.location){
+        autoComplete(req.query.location,(error,places)=>{
+            if(error){
+                res.send(error)
+            }
+            else{
+                res.send(places)
+            }
+        })
+    }
+})
 app.get('/help',(req,res)=>{
     res.render('help',{
         section:'Help',

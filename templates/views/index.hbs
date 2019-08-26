@@ -11,8 +11,11 @@
 <header>
     {{>header}}
     <form>
-        <input placeholder="location">
+        <input type="text" list="datalist" placeholder="location">
         <button>Search</button>
+        <datalist id="datalist">
+            <!-- This data list will be edited through javascript     -->
+        </datalist>
     </form>
     <div id="sss">
     <p id="loc"></p>

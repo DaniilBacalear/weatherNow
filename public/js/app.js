@@ -5,6 +5,31 @@ const temp = document.querySelector('#temp')
 const wind  = document.querySelector("#wind")
 const conditions = document.querySelector('#cond')
 const resultsDiv = document.querySelector('#sss')
+const dataList = document.querySelector('#datalist')
+let prevSearch = null
+weatherForm.addEventListener('keypress',(e)=>{
+        while(dataList.firstChild){
+            dataList.removeChild(dataList.firstChild)
+        }
+    if(search.value) {
+        //prevSearch = search.value
+        fetch('/autocomplete?location='+encodeURIComponent(search.value.toString())).then((response)=>{
+            response.json().then((data)=> {
+                    for (let i in data.places) {
+                        const option = document.createElement('OPTION')
+                        const att = document.createAttribute('value')
+                        att.value = data.places[i]
+                        option.setAttributeNode(att)
+                        dataList.appendChild(option)
+                    }
+
+                }
+                )
+            }
+        ).catch((e)=>console.log('error'))
+    }
+
+})
 
 weatherForm.addEventListener('submit',(e)=> {
         e.preventDefault()

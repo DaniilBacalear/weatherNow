@@ -65,3 +65,6 @@ input:hover{
     color: black;
     font-weight: bold;
 }
+input::-webkit-calendar-picker-indicator {
+    display: none;
+}
