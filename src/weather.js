@@ -13,11 +13,12 @@ const getWeather = (longitude,latitude,callback) =>{
             callback({error:response.body.error},undefined)
         }
         else{
+            console.log(response.body.currently.icon)
             callback(undefined,{
                 temperature:response.body.currently.temperature,
                 conditions:response.body.currently.summary,
-                wind:response.body.currently.windSpeed
-
+                wind:response.body.currently.windSpeed,
+                iconId:response.body.currently.icon
             })
         }
     })

@@ -19,21 +19,21 @@ app.use(express.static(path.join(__dirname,'../public')))
 app.get('',(req,res)=>{
     res.render('',{
         section: 'WeatherSearch',
-        a1:'highlight'
+        a1:'highlight',
+        testing:'test'
     })
 })
 app.get('/weather',(req,res)=>{
     if(req.query.longitude && req.query.latitude){
-        weather(req.query.latitude,req.query.longitude,(error,{temperature,conditions,wind})=>{
+        weather(req.query.latitude,req.query.longitude,(error,{temperature,conditions,wind,iconId})=>{
             if(error){
                  res.send({error:error})
             }
             else{
-               //res.send({temperature,conditions,wind})
                 reverseGeocode(req.query.longitude,req.query.latitude,(error,{location})=>{
                     if(error) res.send({error:error})
                     else{
-                        res.send({temperature,conditions,wind,location})
+                        res.send({temperature,conditions,wind,location,iconId})
                     }
                 })
 
@@ -48,11 +48,16 @@ app.get('/weather',(req,res)=>{
             if (error) {
                 res.send(error)
             } else {
-                weather(longitude, latitude, (error, {temperature, conditions, wind}) => {
+                weather(longitude, latitude, (error,{temperature,conditions,iconId,wind}) => {
                     if (error) {
                         res.send(error)
                     } else {
-                        res.send({temperature, location, conditions, wind})
+                        res.send({temperature,
+                            conditions,
+                            //iconId,
+                            wind,
+                            location
+                        })
                     }
                 })
             }
